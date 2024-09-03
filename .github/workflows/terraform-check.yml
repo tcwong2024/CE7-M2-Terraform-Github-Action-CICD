@@ -20,7 +20,7 @@ jobs:
 
       # Installs the specified version of Terraform.
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
+        uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.5.0
 
