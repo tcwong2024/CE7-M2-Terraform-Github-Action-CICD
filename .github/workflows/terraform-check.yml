@@ -16,7 +16,7 @@ jobs:
     steps:
       # Retrieves the repository code.
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Configures AWS credentials 
       - name: Configure AWS credentials
@@ -28,9 +28,9 @@ jobs:
 
       # Installs the specified version of Terraform.
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
+        uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: 1.5.0
+          terraform_version: 1.9.0
 
       # Initializes the working directory, downloading provider plugins and setting up the backend.
       - name: Terraform Init
