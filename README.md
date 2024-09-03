@@ -8,5 +8,6 @@
      * main.tf
      * local.tf
      * variable.tf
+4. Add aws_sns_topic resources
 
 
