@@ -74,7 +74,7 @@ jobs:
 
       # Generates an execution plan using the dev.tfvars file.
       - name: Terraform Plan
-        run: terraform plan -var-file="/environments/dev.tfvars"
+        run: terraform plan -var-file="environments/dev.tfvars"
         env:
           TF_VAR_environment: dev
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -83,7 +83,7 @@ jobs:
       # Applies the Terraform plan automatically.
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -var-file="/environments/dev.tfvars" -auto-approve
+        run: terraform apply -var-file="environments/dev.tfvars" -auto-approve
         env:
             TF_VAR_environment: dev
             AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
