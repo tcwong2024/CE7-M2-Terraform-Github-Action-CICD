@@ -10,11 +10,11 @@
 #   default     = "terraform-github-act-ci-wtc.tfstate"
 # }
 
-# variable "region_name" {
-#   description = "The aws region use"
-#   type        = string
-#   default     = "us-east-1"
-# }
+variable "region_name" {
+  description = "The aws region use"
+  type        = string
+  default     = "us-east-1"
+}
 
 variable "sns_topic_name" {
   description = "sns topic"
