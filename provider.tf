@@ -19,4 +19,5 @@ provider "aws" {
 
 resource "aws_sns_topic" "user_updates" {
   name = var.sns_topic_name
+  kms_master_key_id = "alias/aws/sns"  # Enable encryption using the default KMS key
 }
