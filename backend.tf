@@ -4,8 +4,8 @@
 
 terraform {
   backend "s3" {
-    bucket = var.bucket_name
-    key    = var.tfstate_name
-    region = var.region_name
+    bucket = "sctp-ce7-tfstate"                         # Replace with your S3 bucket name
+    key    = "terraform-github-act-ci-wtc.tfstate"      # Replace with your tfstate file name
+    region = "us-east-1"                                # Replace with your AWS region
   }
 }
