@@ -15,3 +15,9 @@
 #   type        = string
 #   default     = "us-east-1"
 # }
+
+variable "sns_topic_name" {
+  description = "sns topic"
+  type        = string
+  default     = "wtc-sns-topic"
+}
