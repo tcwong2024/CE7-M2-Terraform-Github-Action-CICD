@@ -1,4 +1,4 @@
-# Create Terraform workflow ton run on Github Action
+# Create Terraform workflow to run on Github Action to spin up AWS SNS Topic
 
 1. Create .github\workflow\terraform-check.yml
 2. Create environment\dev.tfvaes
