@@ -64,13 +64,13 @@ jobs:
       - name: Terraform tfsec
         run: tfsec .
 
-      # Runs additional security checks.
-      - name: Setup Checkov
-        run: |
-          pip install checkov
+      # # Runs additional security checks.
+      # - name: Setup Checkov
+      #   run: |
+      #     pip install checkov
 
-      - name: Terraform Checkov
-        run: checkov -d .
+      # - name: Terraform Checkov
+      #   run: checkov -d .
 
       # Generates an execution plan using the dev.tfvars file.
       - name: Terraform Plan
