@@ -18,7 +18,8 @@ provider "aws" {
 }
 
 resource "aws_kms_key" "sns_key" {
-  description = "KMS key for SNS topic encryption"
+  description         = "KMS key for SNS topic encryption"
+  enable_key_rotation = true # Enable automatic key rotation
 }
 
 resource "aws_kms_alias" "sns_key_alias" {
