@@ -1,0 +1,84 @@
+name: Terraform CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - dev
+  # schedule:
+  #   - cron: '0 0 * * 1'  # Runs every Monday at midnight
+
+jobs:
+  terraform-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Retrieves the repository code.
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Installs the specified version of Terraform.
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.5.0
+
+      # Initializes the working directory, downloading provider plugins and setting up the backend.
+      - name: Terraform Init
+        run: terraform init
+
+      # Ensures the Terraform code is correctly formatted. 
+      - name: Terraform Format Check
+        run: terraform fmt -check
+
+      # Validates the configuration. 
+      - name: Terraform Validate
+        run: terraform validate -no-color
+
+      # Lints the Terraform code.
+      - name: Setup TFLint
+        uses: terraform-linters/setup-tflint@v3
+        with: 
+            tflint_version: latest
+    
+      - name: Show TFlint version
+        run: tflint --version
+
+      - name: Run TFLint
+        run: tflint -f compact
+  
+      # Runs security scans on the Terraform code.
+      - name: Setup tfsec
+        run: |
+            curl -s https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install_linux.sh | bash
+
+      - name: Terraform tfsec
+        run: tfsec .
+
+      # Runs additional security checks.
+      - name: Setup Checkov
+        run: |
+          pip install checkov
+
+      - name: Terraform Checkov
+        run: checkov -d .
+
+      # Generates an execution plan using the dev.tfvars file.
+      - name: Terraform Plan
+        run: terraform plan -var-file="environments/dev.tfvars"
+        env:
+          TF_VAR_environment: dev
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      # Applies the Terraform plan automatically.
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: terraform apply -var-file="environments/dev.tfvars" -auto-approve
+        env:
+            TF_VAR_environment: dev
+            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      
