@@ -19,5 +19,8 @@ variable "region_name" {
 variable "sns_topic_name" {
   description = "sns topic"
   type        = string
-  default     = "wtc-sns-topic"
+
+  #default     = "wtc-sns-topic"
+  default = "wtc-${var.environment}-sns-topic"
 }
+
