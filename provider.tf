@@ -28,6 +28,7 @@ resource "aws_kms_alias" "sns_key_alias" {
 }
 
 resource "aws_sns_topic" "user_updates" {
-  name              = var.sns_topic_name
+  #name              = var.sns_topic_name
+  name              = "wtc-${var.environment}-sns-topic"
   kms_master_key_id = aws_kms_key.sns_key.arn # Enable encryption using the default KMS key
 }
