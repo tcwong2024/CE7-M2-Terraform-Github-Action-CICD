@@ -23,9 +23,9 @@ variable "region_name" {
 #   default = "wtc-sns-topic"
 # }
 
-# add this, then move it to variables.tf
+# get the value from environments > dev.tfvars > environment
 variable "environment" {
   type        = string
-  default     = "test"
+  default     = "env"
   description = "this is a type of sns topic"
 }
