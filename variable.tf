@@ -16,13 +16,12 @@ variable "region_name" {
   default     = "us-east-1"
 }
 
-variable "sns_topic_name" {
-  description = "sns topic"
-  type        = string
+# variable "sns_topic_name" {
+#   description = "sns topic"
+#   type        = string
 
-  default = "wtc-sns-topic"
-  #default = "wtc-${var.environment}-sns-topic"
-}
+#   default = "wtc-sns-topic"
+# }
 
 # add this, then move it to variables.tf
 variable "environment" {
