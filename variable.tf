@@ -24,3 +24,9 @@ variable "sns_topic_name" {
   default = "wtc-${var.environment}-sns-topic"
 }
 
+# add this, then move it to variables.tf
+variable "environment" {
+  type        = string
+  default     = "test"
+  description = "this is a type of sns topic"
+}
